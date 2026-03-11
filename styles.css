@@ -1,0 +1,228 @@
+/* Reset y diseño básico */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(to bottom, #a3d9ff 0%, #e0f6ff 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    position: relative;
+}
+
+.ground {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 25vh;
+    background: #689f38;
+    z-index: -1;
+    border-top: 5px solid #558b2f;
+}
+
+.garden {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateY(5vh);
+}
+
+.tulip {
+    position: relative;
+    width: 200px;
+    height: 380px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.pot {
+    position: absolute;
+    bottom: 0;
+    width: 90px;
+    height: 70px;
+    background: linear-gradient(to right, #ba6d3c, #da864d);
+    border-radius: 5px 5px 25px 25px;
+    box-shadow: inset -15px -5px 20px rgba(0, 0, 0, 0.15), 0 10px 15px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+.pot::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: -10px;
+    width: 110px;
+    height: 20px;
+    background: linear-gradient(to right, #cc7844, #e59155);
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.stem {
+    position: absolute;
+    bottom: 60px;
+    width: 8px;
+    height: 0px;
+    /* Inicialmente 0 */
+    background: linear-gradient(to right, #2e7d32, #4caf50);
+    border-radius: 4px;
+    transform-origin: bottom center;
+    transition: height 2.5s ease-in-out;
+    box-shadow: inset -2px 0 3px rgba(0, 0, 0, 0.2);
+}
+
+.leaf {
+    position: absolute;
+    bottom: 80px;
+    width: 45px;
+    height: 100px;
+    background: linear-gradient(to top right, #388e3c, #4caf50);
+    border-radius: 50% 0 50% 0;
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+    transition: transform 1.5s ease-in-out, opacity 0.5s;
+    z-index: 5;
+    box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.1), 3px 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+.leaf.left {
+    transform-origin: bottom right;
+    left: 40px;
+    border-radius: 0 50% 0 50%;
+}
+
+.leaf.right {
+    transform-origin: bottom left;
+    right: 40px;
+}
+
+.flower {
+    position: absolute;
+    bottom: 60px;
+    width: 80px;
+    height: 90px;
+    transform-origin: bottom center;
+    transform: scale(0);
+    opacity: 0;
+    transition: bottom 2.5s ease-in-out, transform 1.5s ease-out 2.5s, opacity 1s 2.5s;
+    z-index: 8;
+    filter: drop-shadow(0px 5px 5px rgba(255, 64, 129, 0.4));
+}
+
+.petal {
+    position: absolute;
+    bottom: 0;
+    background: radial-gradient(circle at bottom, #ffb3c6, #ff4081);
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.15);
+}
+
+.petal-center {
+    width: 55px;
+    height: 85px;
+    left: 12.5px;
+    border-radius: 50% 50% 20% 20%;
+    z-index: 3;
+    background: radial-gradient(circle at bottom, #ffa1b9, #f50057);
+}
+
+.petal-left {
+    width: 50px;
+    height: 80px;
+    left: -5px;
+    border-radius: 50% 10% 20% 50%;
+    transform: rotate(-18deg);
+    z-index: 2;
+}
+
+.petal-right {
+    width: 50px;
+    height: 80px;
+    right: -5px;
+    border-radius: 10% 50% 50% 20%;
+    transform: rotate(18deg);
+    z-index: 2;
+}
+
+.petal-center::after {
+    content: '';
+    position: absolute;
+    bottom: 12px;
+    left: 22.5px;
+    width: 10px;
+    height: 35px;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    filter: blur(3px);
+}
+
+/* ================== ESTADOS DE ANIMACIÓN (GROWING) ================== */
+
+/* El Tallo crece */
+.tulip.growing .stem {
+    height: 220px;
+}
+
+/* La Flor sube junto al tallo, y al terminar (2.5s después), hace "scale" */
+.tulip.growing .flower {
+    bottom: 270px;
+    /* 60px de la altura inicial + ~210px que sobresale el tallo */
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Las hojas brotan mientras el tallo crece */
+.tulip.growing .leaf.left {
+    transition-delay: 1.2s;
+    /* Comienza cuando el tallo va a la mitad */
+    opacity: 1;
+    transform: scale(1) rotate(-40deg);
+}
+
+.tulip.growing .leaf.right {
+    transition-delay: 1.6s;
+    opacity: 1;
+    transform: scale(1) rotate(40deg);
+}
+
+
+/* ================== ESTILOS DEL BOTON ================== */
+#action-btn {
+    margin-top: 50px;
+    padding: 14px 28px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    background: #ff4081;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 64, 129, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    z-index: 20;
+}
+
+#action-btn:hover {
+    background: #f50057;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 64, 129, 0.5);
+}
+
+#action-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 10px rgba(255, 64, 129, 0.3);
+}
+
+#action-btn:disabled {
+    background: #ccc;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+}
