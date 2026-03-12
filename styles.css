@@ -33,7 +33,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    transform: translateY(22vh); /* Ajustado para que descanse sobre el pasto */
+    transform: translateY(22vh);
+    /* Ajustado para que descanse sobre el pasto */
 }
 
 /* Contenedor principal de los tulipanes y maceta */
@@ -51,7 +52,8 @@ body {
     bottom: 0px;
     left: 50%;
     transform: translateX(-50%);
-    width: 140px; /* Maceta más ancha para 5 tulipanes */
+    width: 140px;
+    /* Maceta más ancha para 5 tulipanes */
     height: 80px;
     background: linear-gradient(to right, #ba6d3c, #da864d);
     border-radius: 5px 5px 25px 25px;
@@ -65,11 +67,28 @@ body {
     top: -12px;
     left: 50%;
     transform: translateX(-50%);
-    width: 160px; /* Borde de maceta más ancho */
+    width: 160px;
+    /* Borde de maceta más ancho */
     height: 20px;
     background: linear-gradient(to right, #cc7844, #e59155);
     border-radius: 4px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.pot-label {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #5c351f;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.4), -1px -1px 0px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    text-align: center;
+    line-height: 1.1;
+    z-index: 25;
 }
 
 /* Posiciones base para los 5 Tulipanes */
@@ -82,8 +101,10 @@ body {
 }
 
 .tulip-far-left {
-    left: calc(50% - 45px); /* Más juntos al centro */
-    transform: rotate(-22deg); /* Menos inclinados para no separar las flores */
+    left: calc(50% - 45px);
+    /* Más juntos al centro */
+    transform: rotate(-22deg);
+    /* Menos inclinados para no separar las flores */
     z-index: 4;
 }
 
@@ -95,7 +116,8 @@ body {
 
 .tulip-center {
     left: calc(50% - 4px);
-    bottom: 55px; /* Ligeramente más arriba */
+    bottom: 55px;
+    /* Ligeramente más arriba */
     z-index: 10;
 }
 
@@ -107,7 +129,8 @@ body {
 
 .tulip-far-right {
     left: calc(50% + 37px);
-    transform: rotate(22deg); /* Menos inclinados para agrupar las flores */
+    transform: rotate(22deg);
+    /* Menos inclinados para agrupar las flores */
     z-index: 4;
 }
 
@@ -152,7 +175,8 @@ body {
 
 /* Posicionamiento Vertical Individual de Hojas */
 .tulip-center .leaf {
-    bottom: -10px; /* Bajar más las hojas centrales (ocultar un poco en la maceta) */
+    bottom: -10px;
+    /* Bajar más las hojas centrales (ocultar un poco en la maceta) */
 }
 
 .tulip-left .leaf,
@@ -162,7 +186,8 @@ body {
 
 .tulip-far-left .leaf,
 .tulip-far-right .leaf {
-    bottom: 85px; /* Super elevadas para que nazcan directamente desde arriba del borde */
+    bottom: 85px;
+    /* Super elevadas para que nazcan directamente desde arriba del borde */
 }
 
 /* Flor Container */
@@ -432,7 +457,8 @@ body {
 }
 
 body.time-night .stars {
-    opacity: 1; /* Solo visibles de noche */
+    opacity: 1;
+    /* Solo visibles de noche */
 }
 
 .star {
@@ -443,8 +469,16 @@ body.time-night .stars {
 }
 
 @keyframes twinkle {
-    0% { opacity: 0.2; transform: scale(0.8); }
-    100% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 5px rgba(255, 255, 255, 0.8); }
+    0% {
+        opacity: 0.2;
+        transform: scale(0.8);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1.2);
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    }
 }
 
 /* --- Estrella Fugaz --- */
@@ -454,7 +488,7 @@ body.time-night .stars {
     right: -20vw;
     width: 100px;
     height: 2px;
-    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
     border-radius: 50%;
     transform: rotate(-35deg);
     pointer-events: none;
@@ -464,7 +498,8 @@ body.time-night .stars {
 
 /* La estrella fugaz solo se anima (aparece esporádicamente) si es de noche */
 body.time-night .shooting-star {
-    animation: shooting 12s infinite 4s; /* Dispara cada 12 segundos, con delay de 4s */
+    animation: shooting 12s infinite 4s;
+    /* Dispara cada 12 segundos, con delay de 4s */
 }
 
 @keyframes shooting {
@@ -473,14 +508,17 @@ body.time-night .shooting-star {
         top: 5vh;
         opacity: 0;
     }
+
     5% {
         opacity: 1;
     }
+
     20% {
         right: 120vw;
         top: 60vh;
         opacity: 0;
     }
+
     100% {
         right: 120vw;
         opacity: 0;
@@ -495,13 +533,13 @@ body.time-night .shooting-star {
     border-radius: 50%;
     transform: translate(-50%, -50%);
     z-index: -1;
-    
+
     /* Variables controladas por el tema (JS) */
     background: var(--celestial-bg, #fff59d);
     box-shadow: var(--celestial-glow, 0 0 80px 30px rgba(255, 235, 59, 0.6));
     top: var(--celestial-top, 15vh);
     left: var(--celestial-left, 50vw);
-    
+
     /* Animación de transición suave entre horas */
     transition: top 3s ease-in-out, left 3s ease-in-out, background 3s ease, box-shadow 3s ease;
 }
@@ -523,7 +561,7 @@ body.time-night .shooting-star {
     background: #fff;
     border-radius: 50px;
     opacity: 0.8;
-    filter: drop-shadow(0 5px 5px rgba(0,0,0,0.05));
+    filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.05));
     animation: floatCloud linear infinite;
 }
 
@@ -543,8 +581,20 @@ body.time-night .shooting-star {
     animation-duration: 40s;
     animation-delay: 0s;
 }
-.cloud-1::before { width: 50px; height: 50px; top: -25px; left: 15px; }
-.cloud-1::after { width: 70px; height: 70px; top: -35px; right: 15px; }
+
+.cloud-1::before {
+    width: 50px;
+    height: 50px;
+    top: -25px;
+    left: 15px;
+}
+
+.cloud-1::after {
+    width: 70px;
+    height: 70px;
+    top: -35px;
+    right: 15px;
+}
 
 .cloud-2 {
     width: 100px;
@@ -556,8 +606,20 @@ body.time-night .shooting-star {
     animation-delay: 15s;
     --cloud-scale: 0.8;
 }
-.cloud-2::before { width: 40px; height: 40px; top: -20px; left: 15px; }
-.cloud-2::after { width: 60px; height: 60px; top: -30px; right: 15px; }
+
+.cloud-2::before {
+    width: 40px;
+    height: 40px;
+    top: -20px;
+    left: 15px;
+}
+
+.cloud-2::after {
+    width: 60px;
+    height: 60px;
+    top: -30px;
+    right: 15px;
+}
 
 .cloud-3 {
     width: 150px;
@@ -569,8 +631,20 @@ body.time-night .shooting-star {
     animation-delay: 25s;
     --cloud-scale: 1.2;
 }
-.cloud-3::before { width: 60px; height: 60px; top: -30px; left: 20px; }
-.cloud-3::after { width: 80px; height: 80px; top: -40px; right: 20px; }
+
+.cloud-3::before {
+    width: 60px;
+    height: 60px;
+    top: -30px;
+    left: 20px;
+}
+
+.cloud-3::after {
+    width: 80px;
+    height: 80px;
+    top: -40px;
+    right: 20px;
+}
 
 .cloud-4 {
     width: 90px;
@@ -582,18 +656,36 @@ body.time-night .shooting-star {
     animation-delay: 5s;
     --cloud-scale: 0.7;
 }
-.cloud-4::before { width: 35px; height: 35px; top: -15px; left: 10px; }
-.cloud-4::after { width: 50px; height: 50px; top: -25px; right: 10px; }
+
+.cloud-4::before {
+    width: 35px;
+    height: 35px;
+    top: -15px;
+    left: 10px;
+}
+
+.cloud-4::after {
+    width: 50px;
+    height: 50px;
+    top: -25px;
+    right: 10px;
+}
 
 @keyframes floatCloud {
-    0% { transform: translateX(-200px) scale(var(--cloud-scale, 1)); }
-    100% { transform: translateX(calc(100vw + 400px)) scale(var(--cloud-scale, 1)); }
+    0% {
+        transform: translateX(-200px) scale(var(--cloud-scale, 1));
+    }
+
+    100% {
+        transform: translateX(calc(100vw + 400px)) scale(var(--cloud-scale, 1));
+    }
 }
 
 /* --- Brotes de Pasto --- */
 .grass {
     position: absolute;
-    bottom: 100%; /* Justo por encima del borde del .ground */
+    bottom: 100%;
+    /* Justo por encima del borde del .ground */
     width: 6px;
     background: linear-gradient(to top, #388e3c, #558b2f);
     border-radius: 5px 5px 0 0;
@@ -630,17 +722,56 @@ body.time-night .shooting-star {
 }
 
 /* Distintos brotes de pasto */
-.grass-1 { left: 10%; height: 30px; animation-delay: 0s; }
-.grass-2 { left: 25%; height: 20px; animation-delay: -1s; }
-.grass-3 { left: 40%; height: 35px; animation-delay: -2s; }
-.grass-4 { left: 60%; height: 25px; animation-delay: -0.5s; }
-.grass-5 { left: 75%; height: 32px; animation-delay: -1.5s; }
-.grass-6 { left: 88%; height: 18px; animation-delay: -0.8s; }
-.grass-7 { left: 95%; height: 28px; animation-delay: -2.2s; }
+.grass-1 {
+    left: 10%;
+    height: 30px;
+    animation-delay: 0s;
+}
+
+.grass-2 {
+    left: 25%;
+    height: 20px;
+    animation-delay: -1s;
+}
+
+.grass-3 {
+    left: 40%;
+    height: 35px;
+    animation-delay: -2s;
+}
+
+.grass-4 {
+    left: 60%;
+    height: 25px;
+    animation-delay: -0.5s;
+}
+
+.grass-5 {
+    left: 75%;
+    height: 32px;
+    animation-delay: -1.5s;
+}
+
+.grass-6 {
+    left: 88%;
+    height: 18px;
+    animation-delay: -0.8s;
+}
+
+.grass-7 {
+    left: 95%;
+    height: 28px;
+    animation-delay: -2.2s;
+}
 
 @keyframes sway {
-    0% { transform: rotate(-8deg); }
-    100% { transform: rotate(8deg); }
+    0% {
+        transform: rotate(-8deg);
+    }
+
+    100% {
+        transform: rotate(8deg);
+    }
 }
 
 /* ================== TEMPORADAS DEL DÍA (DYNAMIC THEMES) ================== */
@@ -684,7 +815,7 @@ body.time-night {
     --ground-border: #111e0b;
     /* Luna */
     --celestial-bg: #f5f3ce;
-    --celestial-glow: 0 0 50px 15px rgba(255, 255, 255, 0.3), inset -15px -15px 0 0 rgba(0,0,0,0.1);
+    --celestial-glow: 0 0 50px 15px rgba(255, 255, 255, 0.3), inset -15px -15px 0 0 rgba(0, 0, 0, 0.1);
     --celestial-top: 20vh;
     --celestial-left: 70vw;
 }
@@ -694,6 +825,7 @@ body.time-night .cloud {
     background: #aab;
     opacity: 0.2 !important;
 }
+
 body.time-night .cloud::before,
 body.time-night .cloud::after {
     background: #aab;
@@ -704,9 +836,10 @@ body.time-night .cloud::after {
 /* Tablets (hasta 768px) */
 @media (max-width: 768px) {
     .garden {
-        transform: translateY(18vh) scale(0.85); /* Escalar todo un poco más pequeño */
+        transform: translateY(18vh) scale(0.85);
+        /* Escalar todo un poco más pequeño */
     }
-    
+
     #action-btn {
         margin-top: 40px;
         padding: 12px 24px;
@@ -717,12 +850,54 @@ body.time-night .cloud::after {
 /* Teléfonos móviles pequeños (hasta 480px) */
 @media (max-width: 480px) {
     .garden {
-        transform: translateY(12vh) scale(0.7); /* Reducir aún más para que todo quepa en la pantalla sin desbordar */
+        transform: translateY(12vh) scale(0.7);
+        /* Reducir aún más para que todo quepa en la pantalla sin desbordar */
     }
 
     #action-btn {
         margin-top: 30px;
         padding: 10px 20px;
         font-size: 1rem;
+    }
+}
+
+/* ================== PARTICULAS DE TULIPAN ================== */
+#particles-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 50;
+    /* Por encima de las flores */
+}
+
+.magic-particle {
+    position: absolute;
+    border-radius: 50%;
+    /* El background (color) se asienta vía JS para que caiga en la gama de amarillos */
+    box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.4);
+    opacity: 0;
+    animation: floatParticle linear forwards;
+}
+
+@keyframes floatParticle {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.5);
+    }
+
+    20% {
+        opacity: 0.8;
+    }
+
+    80% {
+        opacity: 0.6;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-80px) scale(1.5);
     }
 }

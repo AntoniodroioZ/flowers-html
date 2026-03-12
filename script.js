@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let isGrown = false;
 
     /* --- Lógica de la hora del día --- */
-    const debugMode = false; // CAMBIA A FALSE PARA OCULTAR EL SLIDER Y USAR TIEMPO REAL
+    const debugMode = true; // CAMBIAR A FALSE PARA OCULTAR EL SLIDER Y USAR TIEMPO REAL
 
     const debugPanel = document.getElementById('debug-panel');
     const timeSlider = document.getElementById('time-slider');
@@ -78,6 +78,60 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* --- Lógica del Botón / Crecimiento --- */
+    let particleInterval = null;
+
+    function createParticle() {
+        if (!isGrown) return;
+
+        const particlesContainer = document.getElementById('particles-container');
+        const particle = document.createElement('div');
+        particle.classList.add('magic-particle');
+
+        // Seleccionar una flor aleatoriamente
+        const flowers = document.querySelectorAll('.flower');
+        if (flowers.length === 0) return;
+
+        const randomFlower = flowers[Math.floor(Math.random() * flowers.length)];
+        const flowerRect = randomFlower.getBoundingClientRect();
+        const garden = document.querySelector('.garden');
+        const gardenRect = garden.getBoundingClientRect();
+
+        // Obtener el factor de escala visual aplicado a .garden en CSS (@media scale)
+        const scale = gardenRect.width / garden.offsetWidth;
+
+        // Calcular la posición interna relativa dividiendo entre la escala actual
+        const relX = (flowerRect.left - gardenRect.left) / scale;
+        const relY = (flowerRect.top - gardenRect.top) / scale;
+
+        // Agregar un leve randomness (jitter)
+        const posX = relX + (Math.random() * 40 - 10);
+        const posY = relY + (Math.random() * 40 - 20);
+
+        // Sombras de amarillos/dorados copiados de los tulipanes
+        const colors = ['#ffe082', '#ffeb3b', '#ffc107', '#ffb300', '#ff9800'];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+        // Tamaño aleatorio pequeño
+        const size = Math.random() * 6 + 3; // Entre 3 y 9 px
+
+        particle.style.left = `${posX}px`;
+        particle.style.top = `${posY}px`;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.background = randomColor;
+
+        // Duración de la animación flotante aleatoria (entre 2 y 4 segundos)
+        const duration = Math.random() * 2000 + 2000;
+        particle.style.animationDuration = `${duration}ms`;
+
+        particlesContainer.appendChild(particle);
+
+        // Limpieza de memoria tras terminar la animación
+        setTimeout(() => {
+            particle.remove();
+        }, duration);
+    }
+
     btn.addEventListener('click', () => {
         if (!isGrown) {
             plantContainer.classList.add('growing');
@@ -89,18 +143,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 btn.disabled = false;
                 btn.textContent = 'Marchitar y reiniciar 🥀';
                 isGrown = true;
+
+                // Empezar a soltar partículas
+                particleInterval = setInterval(createParticle, 300);
             }, 4500);
 
         } else {
             plantContainer.classList.remove('growing');
             btn.textContent = 'Preparando tierra...';
             btn.disabled = true;
+            isGrown = false;
+
+            // Detener partículas
+            if (particleInterval) clearInterval(particleInterval);
+            document.getElementById('particles-container').innerHTML = ''; // Limpiar restantes
 
             // La reducción tarda aprox 1.5s
             setTimeout(() => {
                 btn.disabled = false;
                 btn.textContent = 'Plantar y Crecer 🌷';
-                isGrown = false;
             }, 2000);
         }
     });
