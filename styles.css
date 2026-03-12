@@ -31,7 +31,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    transform: translateY(5vh);
+    transform: translateY(22vh); /* Ajustado para que descanse sobre el pasto */
 }
 
 /* Contenedor principal de los tulipanes y maceta */
@@ -320,4 +320,171 @@ body {
     box-shadow: none;
     cursor: not-allowed;
     transform: none;
+}
+
+/* ================== AMBIENTE (NUBES Y PASTO) ================== */
+
+/* --- Nubes --- */
+.clouds {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.cloud {
+    position: absolute;
+    background: #fff;
+    border-radius: 50px;
+    opacity: 0.8;
+    filter: drop-shadow(0 5px 5px rgba(0,0,0,0.05));
+    animation: floatCloud linear infinite;
+}
+
+.cloud::before,
+.cloud::after {
+    content: '';
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+}
+
+.cloud-1 {
+    width: 120px;
+    height: 40px;
+    top: 15%;
+    left: -150px;
+    animation-duration: 40s;
+    animation-delay: 0s;
+}
+.cloud-1::before { width: 50px; height: 50px; top: -25px; left: 15px; }
+.cloud-1::after { width: 70px; height: 70px; top: -35px; right: 15px; }
+
+.cloud-2 {
+    width: 100px;
+    height: 35px;
+    top: 35%;
+    left: -150px;
+    opacity: 0.6;
+    animation-duration: 55s;
+    animation-delay: 15s;
+    --cloud-scale: 0.8;
+}
+.cloud-2::before { width: 40px; height: 40px; top: -20px; left: 15px; }
+.cloud-2::after { width: 60px; height: 60px; top: -30px; right: 15px; }
+
+.cloud-3 {
+    width: 150px;
+    height: 45px;
+    top: 10%;
+    left: -200px;
+    opacity: 0.9;
+    animation-duration: 45s;
+    animation-delay: 25s;
+    --cloud-scale: 1.2;
+}
+.cloud-3::before { width: 60px; height: 60px; top: -30px; left: 20px; }
+.cloud-3::after { width: 80px; height: 80px; top: -40px; right: 20px; }
+
+.cloud-4 {
+    width: 90px;
+    height: 30px;
+    top: 25%;
+    left: -150px;
+    opacity: 0.5;
+    animation-duration: 35s;
+    animation-delay: 5s;
+    --cloud-scale: 0.7;
+}
+.cloud-4::before { width: 35px; height: 35px; top: -15px; left: 10px; }
+.cloud-4::after { width: 50px; height: 50px; top: -25px; right: 10px; }
+
+@keyframes floatCloud {
+    0% { transform: translateX(-200px) scale(var(--cloud-scale, 1)); }
+    100% { transform: translateX(calc(100vw + 400px)) scale(var(--cloud-scale, 1)); }
+}
+
+/* --- Brotes de Pasto --- */
+.grass {
+    position: absolute;
+    bottom: 100%; /* Justo por encima del borde del .ground */
+    width: 6px;
+    background: linear-gradient(to top, #388e3c, #558b2f);
+    border-radius: 5px 5px 0 0;
+    transform-origin: bottom center;
+    animation: sway 2.5s ease-in-out infinite alternate;
+}
+
+/* Hoja de pasto izquierda */
+.grass::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -5px;
+    width: 4px;
+    height: 70%;
+    background: linear-gradient(to top, #2e7d32, #4caf50);
+    border-radius: 4px 4px 0 0;
+    transform-origin: bottom center;
+    transform: rotate(-25deg);
+}
+
+/* Hoja de pasto derecha */
+.grass::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: -4px;
+    width: 4px;
+    height: 80%;
+    background: linear-gradient(to top, #1b5e20, #388e3c);
+    border-radius: 4px 4px 0 0;
+    transform-origin: bottom center;
+    transform: rotate(25deg);
+}
+
+/* Distintos brotes de pasto */
+.grass-1 { left: 10%; height: 30px; animation-delay: 0s; }
+.grass-2 { left: 25%; height: 20px; animation-delay: -1s; }
+.grass-3 { left: 40%; height: 35px; animation-delay: -2s; }
+.grass-4 { left: 60%; height: 25px; animation-delay: -0.5s; }
+.grass-5 { left: 75%; height: 32px; animation-delay: -1.5s; }
+.grass-6 { left: 88%; height: 18px; animation-delay: -0.8s; }
+.grass-7 { left: 95%; height: 28px; animation-delay: -2.2s; }
+
+@keyframes sway {
+    0% { transform: rotate(-8deg); }
+    100% { transform: rotate(8deg); }
+}
+
+/* ================== RESPONSIVE DESIGN ================== */
+
+/* Tablets (hasta 768px) */
+@media (max-width: 768px) {
+    .garden {
+        transform: translateY(18vh) scale(0.85); /* Escalar todo un poco más pequeño */
+    }
+    
+    #action-btn {
+        margin-top: 40px;
+        padding: 12px 24px;
+        font-size: 1.1rem;
+    }
+}
+
+/* Teléfonos móviles pequeños (hasta 480px) */
+@media (max-width: 480px) {
+    .garden {
+        transform: translateY(12vh) scale(0.7); /* Reducir aún más para que todo quepa en la pantalla sin desbordar */
+    }
+
+    #action-btn {
+        margin-top: 30px;
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
 }
