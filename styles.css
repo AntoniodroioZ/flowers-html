@@ -13,7 +13,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     overflow: hidden;
     position: relative;
-    transition: background 2s ease;
+    /* transition: background 2s ease; -> Causa bug de pantalla blanca en iOS con gradientes */
 }
 
 .ground {
