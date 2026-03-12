@@ -9,6 +9,19 @@
 </head>
 
 <body>
+    <!-- Panel Debug (Oculto por defecto) -->
+    <div id="debug-panel" class="debug-panel hidden">
+        <label for="time-slider">Hora actual: <span id="time-display">--</span>:00 ⏳</label>
+        <input type="range" id="time-slider" min="0" max="23" value="12" step="1">
+    </div>
+
+    <!-- Noche: Estrellas y Estrella Fugaz -->
+    <div class="stars"></div>
+    <div class="shooting-star"></div>
+
+    <!-- Sol y Luna -->
+    <div class="celestial-body"></div>
+
     <!-- Nubes animadas -->
     <div class="clouds">
         <div class="cloud cloud-1"></div>
@@ -30,6 +43,19 @@
     
     <div class="garden">
         <div class="plant-container">
+            <!-- Tulipán Extremo Izquierdo -->
+            <div class="tulip tulip-far-left">
+                <div class="stem"></div>
+                <div class="leaf left"></div>
+                <div class="leaf right"></div>
+                
+                <div class="flower">
+                    <div class="petal petal-left"></div>
+                    <div class="petal petal-right"></div>
+                    <div class="petal petal-center"></div>
+                </div>
+            </div>
+
             <!-- Tulipán Izquierdo -->
             <div class="tulip tulip-left">
                 <div class="stem"></div>
@@ -62,6 +88,19 @@
                 <div class="leaf left"></div>
                 <div class="leaf right"></div>
 
+                <div class="flower">
+                    <div class="petal petal-left"></div>
+                    <div class="petal petal-right"></div>
+                    <div class="petal petal-center"></div>
+                </div>
+            </div>
+
+            <!-- Tulipán Extremo Derecho -->
+            <div class="tulip tulip-far-right">
+                <div class="stem"></div>
+                <div class="leaf left"></div>
+                <div class="leaf right"></div>
+                
                 <div class="flower">
                     <div class="petal petal-left"></div>
                     <div class="petal petal-right"></div>

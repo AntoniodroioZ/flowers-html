@@ -4,7 +4,7 @@
 }
 
 body {
-    background: linear-gradient(to bottom, #a3d9ff 0%, #e0f6ff 100%);
+    background: var(--sky-gradient, linear-gradient(to bottom, #a3d9ff 0%, #e0f6ff 100%));
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,6 +13,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     overflow: hidden;
     position: relative;
+    transition: background 2s ease;
 }
 
 .ground {
@@ -21,9 +22,10 @@ body {
     left: 0;
     width: 100vw;
     height: 25vh;
-    background: #689f38;
+    background: var(--ground-color, #689f38);
     z-index: -1;
-    border-top: 5px solid #558b2f;
+    border-top: 5px solid var(--ground-border, #558b2f);
+    transition: background 2s ease, border-color 2s ease;
 }
 
 .garden {
@@ -49,7 +51,7 @@ body {
     bottom: 0px;
     left: 50%;
     transform: translateX(-50%);
-    width: 120px;
+    width: 140px; /* Maceta más ancha para 5 tulipanes */
     height: 80px;
     background: linear-gradient(to right, #ba6d3c, #da864d);
     border-radius: 5px 5px 25px 25px;
@@ -63,14 +65,14 @@ body {
     top: -12px;
     left: 50%;
     transform: translateX(-50%);
-    width: 140px;
+    width: 160px; /* Borde de maceta más ancho */
     height: 20px;
     background: linear-gradient(to right, #cc7844, #e59155);
     border-radius: 4px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Posiciones base para los 3 Tulipanes */
+/* Posiciones base para los 5 Tulipanes */
 .tulip {
     position: absolute;
     bottom: 50px;
@@ -79,23 +81,34 @@ body {
     transform-origin: bottom center;
 }
 
+.tulip-far-left {
+    left: calc(50% - 45px); /* Más juntos al centro */
+    transform: rotate(-22deg); /* Menos inclinados para no separar las flores */
+    z-index: 4;
+}
+
 .tulip-left {
-    left: calc(50% - 34px);
-    transform: rotate(-18deg);
+    left: calc(50% - 22px);
+    transform: rotate(-10deg);
     z-index: 5;
 }
 
 .tulip-center {
     left: calc(50% - 4px);
-    bottom: 55px;
-    /* Ligeramente más arriba */
+    bottom: 55px; /* Ligeramente más arriba */
     z-index: 10;
 }
 
 .tulip-right {
-    left: calc(50% + 26px);
-    transform: rotate(18deg);
+    left: calc(50% + 14px);
+    transform: rotate(10deg);
     z-index: 5;
+}
+
+.tulip-far-right {
+    left: calc(50% + 37px);
+    transform: rotate(22deg); /* Menos inclinados para agrupar las flores */
+    z-index: 4;
 }
 
 /* Tallo */
@@ -139,13 +152,17 @@ body {
 
 /* Posicionamiento Vertical Individual de Hojas */
 .tulip-center .leaf {
-    bottom: 30px;
+    bottom: -10px; /* Bajar más las hojas centrales (ocultar un poco en la maceta) */
 }
 
 .tulip-left .leaf,
 .tulip-right .leaf {
     bottom: 55px;
-    /* Subir más las hojas de las orillas */
+}
+
+.tulip-far-left .leaf,
+.tulip-far-right .leaf {
+    bottom: 85px; /* Super elevadas para que nazcan directamente desde arriba del borde */
 }
 
 /* Flor Container */
@@ -211,6 +228,31 @@ body {
 }
 
 /* ================== ESTADOS DE ANIMACIÓN (GROWING) ================== */
+
+/* Tulipán Extremo Izquierdo */
+.plant-container.growing .tulip-far-left .stem {
+    height: 150px;
+    transition: height 2.1s ease-in-out;
+}
+
+.plant-container.growing .tulip-far-left .flower {
+    bottom: 140px;
+    opacity: 1;
+    transform: scale(0.75);
+    transition: bottom 2.1s ease-in-out, transform 1s ease-out 2.1s, opacity 1s 2.1s;
+}
+
+.plant-container.growing .tulip-far-left .leaf.left {
+    transition: transform 1.5s ease-out 0.9s, opacity 1s 0.9s;
+    opacity: 1;
+    transform: scale(0.65) rotate(-55deg);
+}
+
+.plant-container.growing .tulip-far-left .leaf.right {
+    transition: transform 1.5s ease-out 1.2s, opacity 1s 1.2s;
+    opacity: 1;
+    transform: scale(0.65) rotate(55deg);
+}
 
 /* Tulipán Izquierdo */
 .plant-container.growing .tulip-left .stem {
@@ -287,6 +329,31 @@ body {
     transform: scale(0.75) rotate(45deg);
 }
 
+/* Tulipán Extremo Derecho */
+.plant-container.growing .tulip-far-right .stem {
+    height: 150px;
+    transition: height 2.0s ease-in-out;
+}
+
+.plant-container.growing .tulip-far-right .flower {
+    bottom: 140px;
+    opacity: 1;
+    transform: scale(0.75);
+    transition: bottom 2.0s ease-in-out, transform 1s ease-out 2.0s, opacity 1s 2.0s;
+}
+
+.plant-container.growing .tulip-far-right .leaf.left {
+    transition: transform 1.5s ease-out 0.8s, opacity 1s 0.8s;
+    opacity: 1;
+    transform: scale(0.65) rotate(-55deg);
+}
+
+.plant-container.growing .tulip-far-right .leaf.right {
+    transition: transform 1.5s ease-out 1.0s, opacity 1s 1.0s;
+    opacity: 1;
+    transform: scale(0.65) rotate(55deg);
+}
+
 /* ================== ESTILOS DEL BOTON ================== */
 #action-btn {
     margin-top: 50px;
@@ -322,7 +389,122 @@ body {
     transform: none;
 }
 
-/* ================== AMBIENTE (NUBES Y PASTO) ================== */
+/* ================== DEBUG PANEL ================== */
+.debug-panel {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.debug-panel input[type="range"] {
+    width: 200px;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ================== AMBIENTE (ESTRELLAS, SOL/LUNA, NUBES Y PASTO) ================== */
+
+/* --- Cielo Estrellado (Noche) --- */
+.stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: -2;
+    opacity: 0;
+    transition: opacity 3s ease;
+}
+
+body.time-night .stars {
+    opacity: 1; /* Solo visibles de noche */
+}
+
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle infinite alternate;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.2; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 5px rgba(255, 255, 255, 0.8); }
+}
+
+/* --- Estrella Fugaz --- */
+.shooting-star {
+    position: absolute;
+    top: 10vh;
+    right: -20vw;
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+    border-radius: 50%;
+    transform: rotate(-35deg);
+    pointer-events: none;
+    z-index: -2;
+    opacity: 0;
+}
+
+/* La estrella fugaz solo se anima (aparece esporádicamente) si es de noche */
+body.time-night .shooting-star {
+    animation: shooting 12s infinite 4s; /* Dispara cada 12 segundos, con delay de 4s */
+}
+
+@keyframes shooting {
+    0% {
+        right: -20vw;
+        top: 5vh;
+        opacity: 0;
+    }
+    5% {
+        opacity: 1;
+    }
+    20% {
+        right: 120vw;
+        top: 60vh;
+        opacity: 0;
+    }
+    100% {
+        right: 120vw;
+        opacity: 0;
+    }
+}
+
+/* --- Sol / Luna --- */
+.celestial-body {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    
+    /* Variables controladas por el tema (JS) */
+    background: var(--celestial-bg, #fff59d);
+    box-shadow: var(--celestial-glow, 0 0 80px 30px rgba(255, 235, 59, 0.6));
+    top: var(--celestial-top, 15vh);
+    left: var(--celestial-left, 50vw);
+    
+    /* Animación de transición suave entre horas */
+    transition: top 3s ease-in-out, left 3s ease-in-out, background 3s ease, box-shadow 3s ease;
+}
 
 /* --- Nubes --- */
 .clouds {
@@ -459,6 +641,62 @@ body {
 @keyframes sway {
     0% { transform: rotate(-8deg); }
     100% { transform: rotate(8deg); }
+}
+
+/* ================== TEMPORADAS DEL DÍA (DYNAMIC THEMES) ================== */
+
+body.time-dawn {
+    --sky-gradient: linear-gradient(to bottom, #ff9a9e 0%, #fecfef 100%);
+    --ground-color: #5d9b4b;
+    --ground-border: #4a7d3c;
+    /* Sol amaneciendo */
+    --celestial-bg: #ffeb3b;
+    --celestial-glow: 0 0 60px 20px rgba(255, 152, 0, 0.4);
+    --celestial-top: 50vh;
+    --celestial-left: 20vw;
+}
+
+body.time-day {
+    --sky-gradient: linear-gradient(to bottom, #a3d9ff 0%, #e0f6ff 100%);
+    --ground-color: #689f38;
+    --ground-border: #558b2f;
+    /* Sol en lo alto */
+    --celestial-bg: #fff59d;
+    --celestial-glow: 0 0 80px 30px rgba(255, 235, 59, 0.6);
+    --celestial-top: 15vh;
+    --celestial-left: 50vw;
+}
+
+body.time-afternoon {
+    --sky-gradient: linear-gradient(to bottom, #fd5e0f 0%, #ff9e7a 50%, #ffd060 100%);
+    --ground-color: #557d2d;
+    --ground-border: #42631f;
+    /* Sol atardeciendo */
+    --celestial-bg: #ff9800;
+    --celestial-glow: 0 0 70px 25px rgba(244, 67, 54, 0.5);
+    --celestial-top: 45vh;
+    --celestial-left: 80vw;
+}
+
+body.time-night {
+    --sky-gradient: linear-gradient(to bottom, #020111 0%, #20124d 50%, #000022 100%);
+    --ground-color: #1a2e12;
+    --ground-border: #111e0b;
+    /* Luna */
+    --celestial-bg: #f5f3ce;
+    --celestial-glow: 0 0 50px 15px rgba(255, 255, 255, 0.3), inset -15px -15px 0 0 rgba(0,0,0,0.1);
+    --celestial-top: 20vh;
+    --celestial-left: 70vw;
+}
+
+/* Oscurecer las nubes en la noche */
+body.time-night .cloud {
+    background: #aab;
+    opacity: 0.2 !important;
+}
+body.time-night .cloud::before,
+body.time-night .cloud::after {
+    background: #aab;
 }
 
 /* ================== RESPONSIVE DESIGN ================== */
