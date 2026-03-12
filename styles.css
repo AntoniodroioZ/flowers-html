@@ -34,9 +34,10 @@ body {
     transform: translateY(5vh);
 }
 
-.tulip {
+/* Contenedor principal de los tulipanes y maceta */
+.plant-container {
     position: relative;
-    width: 200px;
+    width: 250px;
     height: 380px;
     display: flex;
     justify-content: center;
@@ -45,97 +46,143 @@ body {
 
 .pot {
     position: absolute;
-    bottom: 0;
-    width: 90px;
-    height: 70px;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 80px;
     background: linear-gradient(to right, #ba6d3c, #da864d);
     border-radius: 5px 5px 25px 25px;
-    box-shadow: inset -15px -5px 20px rgba(0, 0, 0, 0.15), 0 10px 15px rgba(0, 0, 0, 0.2);
-    z-index: 10;
+    box-shadow: inset 0px -8px 20px rgba(0, 0, 0, 0.12), 0 10px 15px rgba(0, 0, 0, 0.2);
+    z-index: 20;
 }
 
 .pot::before {
     content: '';
     position: absolute;
     top: -12px;
-    left: -10px;
-    width: 110px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
     height: 20px;
     background: linear-gradient(to right, #cc7844, #e59155);
     border-radius: 4px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-.stem {
+/* Posiciones base para los 3 Tulipanes */
+.tulip {
     position: absolute;
-    bottom: 60px;
+    bottom: 50px;
     width: 8px;
     height: 0px;
-    /* Inicialmente 0 */
+    transform-origin: bottom center;
+}
+
+.tulip-left {
+    left: calc(50% - 34px);
+    transform: rotate(-18deg);
+    z-index: 5;
+}
+
+.tulip-center {
+    left: calc(50% - 4px);
+    bottom: 55px;
+    /* Ligeramente más arriba */
+    z-index: 10;
+}
+
+.tulip-right {
+    left: calc(50% + 26px);
+    transform: rotate(18deg);
+    z-index: 5;
+}
+
+/* Tallo */
+.stem {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 8px;
+    height: 0px;
     background: linear-gradient(to right, #2e7d32, #4caf50);
     border-radius: 4px;
     transform-origin: bottom center;
-    transition: height 2.5s ease-in-out;
-    box-shadow: inset -2px 0 3px rgba(0, 0, 0, 0.2);
+    transition: height 1.5s ease-in-out;
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2);
 }
 
+/* Hojas - Base */
 .leaf {
     position: absolute;
-    bottom: 80px;
-    width: 45px;
-    height: 100px;
+    width: 40px;
+    height: 90px;
     background: linear-gradient(to top right, #388e3c, #4caf50);
     border-radius: 50% 0 50% 0;
     opacity: 0;
     transform: scale(0) rotate(0deg);
-    transition: transform 1.5s ease-in-out, opacity 0.5s;
-    z-index: 5;
-    box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.1), 3px 5px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.8s ease-in, opacity 0.5s;
+    z-index: 6;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1), 0 5px 5px rgba(0, 0, 0, 0.15);
 }
 
 .leaf.left {
     transform-origin: bottom right;
-    left: 40px;
+    right: 8px;
     border-radius: 0 50% 0 50%;
 }
 
 .leaf.right {
     transform-origin: bottom left;
-    right: 40px;
+    left: 8px;
 }
 
+/* Posicionamiento Vertical Individual de Hojas */
+.tulip-center .leaf {
+    bottom: 30px;
+}
+
+.tulip-left .leaf,
+.tulip-right .leaf {
+    bottom: 55px;
+    /* Subir más las hojas de las orillas */
+}
+
+/* Flor Container */
 .flower {
     position: absolute;
-    bottom: 60px;
-    width: 80px;
-    height: 90px;
+    bottom: 0px;
+    left: -31px;
+    width: 70px;
+    height: 80px;
     transform-origin: bottom center;
     transform: scale(0);
     opacity: 0;
-    transition: bottom 2.5s ease-in-out, transform 1.5s ease-out 2.5s, opacity 1s 2.5s;
-    z-index: 8;
-    filter: drop-shadow(0px 5px 5px rgba(255, 64, 129, 0.4));
+    transition: bottom 1.5s ease-in-out, transform 0.8s ease-in, opacity 0.8s;
+    z-index: 15;
+    filter: drop-shadow(0px 5px 5px rgba(251, 192, 45, 0.4));
 }
 
+/* Pétalos AMARILLOS */
 .petal {
     position: absolute;
     bottom: 0;
-    background: radial-gradient(circle at bottom, #ffb3c6, #ff4081);
-    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.15);
+    background: radial-gradient(circle at bottom, #fff59d, #fbc02d);
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
 .petal-center {
-    width: 55px;
-    height: 85px;
+    width: 45px;
+    height: 75px;
     left: 12.5px;
     border-radius: 50% 50% 20% 20%;
     z-index: 3;
-    background: radial-gradient(circle at bottom, #ffa1b9, #f50057);
+    background: radial-gradient(circle at bottom, #fff9c4, #f9a825);
 }
 
 .petal-left {
-    width: 50px;
-    height: 80px;
+    width: 45px;
+    height: 70px;
     left: -5px;
     border-radius: 50% 10% 20% 50%;
     transform: rotate(-18deg);
@@ -143,8 +190,8 @@ body {
 }
 
 .petal-right {
-    width: 50px;
-    height: 80px;
+    width: 45px;
+    height: 70px;
     right: -5px;
     border-radius: 10% 50% 50% 20%;
     transform: rotate(18deg);
@@ -155,43 +202,90 @@ body {
     content: '';
     position: absolute;
     bottom: 12px;
-    left: 22.5px;
+    left: 17.5px;
     width: 10px;
     height: 35px;
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.4);
     border-radius: 50%;
     filter: blur(3px);
 }
 
 /* ================== ESTADOS DE ANIMACIÓN (GROWING) ================== */
 
-/* El Tallo crece */
-.tulip.growing .stem {
-    height: 220px;
+/* Tulipán Izquierdo */
+.plant-container.growing .tulip-left .stem {
+    height: 190px;
+    transition: height 2.5s ease-in-out;
 }
 
-/* La Flor sube junto al tallo, y al terminar (2.5s después), hace "scale" */
-.tulip.growing .flower {
-    bottom: 270px;
-    /* 60px de la altura inicial + ~210px que sobresale el tallo */
+.plant-container.growing .tulip-left .flower {
+    bottom: 180px;
+    opacity: 1;
+    transform: scale(0.9);
+    transition: bottom 2.5s ease-in-out, transform 1.2s ease-out 2.5s, opacity 1s 2.5s;
+}
+
+.plant-container.growing .tulip-left .leaf.left {
+    transition: transform 1.5s ease-out 1.2s, opacity 1s 1.2s;
+    opacity: 1;
+    transform: scale(0.75) rotate(-45deg);
+}
+
+.plant-container.growing .tulip-left .leaf.right {
+    transition: transform 1.5s ease-out 1.5s, opacity 1s 1.5s;
+    opacity: 1;
+    transform: scale(0.75) rotate(45deg);
+}
+
+/* Tulipán Central */
+.plant-container.growing .tulip-center .stem {
+    height: 240px;
+    transition: height 2.7s ease-in-out;
+}
+
+.plant-container.growing .tulip-center .flower {
+    bottom: 230px;
     opacity: 1;
     transform: scale(1);
+    transition: bottom 2.7s ease-in-out, transform 1.5s ease-out 2.7s, opacity 1s 2.7s;
 }
 
-/* Las hojas brotan mientras el tallo crece */
-.tulip.growing .leaf.left {
-    transition-delay: 1.2s;
-    /* Comienza cuando el tallo va a la mitad */
+.plant-container.growing .tulip-center .leaf.left {
+    transition: transform 1.5s ease-out 1.4s, opacity 1s 1.4s;
     opacity: 1;
-    transform: scale(1) rotate(-40deg);
+    transform: scale(0.9) rotate(-40deg);
 }
 
-.tulip.growing .leaf.right {
-    transition-delay: 1.6s;
+.plant-container.growing .tulip-center .leaf.right {
+    transition: transform 1.5s ease-out 1.8s, opacity 1s 1.8s;
     opacity: 1;
-    transform: scale(1) rotate(40deg);
+    transform: scale(0.9) rotate(40deg);
 }
 
+/* Tulipán Derecho */
+.plant-container.growing .tulip-right .stem {
+    height: 190px;
+    transition: height 2.3s ease-in-out;
+}
+
+.plant-container.growing .tulip-right .flower {
+    bottom: 180px;
+    opacity: 1;
+    transform: scale(0.9);
+    transition: bottom 2.3s ease-in-out, transform 1.2s ease-out 2.3s, opacity 1s 2.3s;
+}
+
+.plant-container.growing .tulip-right .leaf.left {
+    transition: transform 1.5s ease-out 1.1s, opacity 1s 1.1s;
+    opacity: 1;
+    transform: scale(0.75) rotate(-45deg);
+}
+
+.plant-container.growing .tulip-right .leaf.right {
+    transition: transform 1.5s ease-out 1.3s, opacity 1s 1.3s;
+    opacity: 1;
+    transform: scale(0.75) rotate(45deg);
+}
 
 /* ================== ESTILOS DEL BOTON ================== */
 #action-btn {
@@ -200,24 +294,25 @@ body {
     font-size: 1.2rem;
     font-weight: bold;
     color: #fff;
-    background: #ff4081;
+    background: #f57f17;
+    /* Color cálido/amaranto para combinar */
     border: none;
     border-radius: 40px;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(255, 64, 129, 0.4);
+    box-shadow: 0 4px 15px rgba(245, 127, 23, 0.4);
     transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
-    z-index: 20;
+    z-index: 30;
 }
 
 #action-btn:hover {
-    background: #f50057;
+    background: #e65100;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 64, 129, 0.5);
+    box-shadow: 0 6px 20px rgba(245, 127, 23, 0.5);
 }
 
 #action-btn:active {
     transform: translateY(2px);
-    box-shadow: 0 2px 10px rgba(255, 64, 129, 0.3);
+    box-shadow: 0 2px 10px rgba(245, 127, 23, 0.3);
 }
 
 #action-btn:disabled {

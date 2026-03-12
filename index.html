@@ -1,32 +1,64 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animación de Tulipán</title>
+    <title>Animación de Tulipanes</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="ground"></div>
-    
+
     <div class="garden">
-        <div class="tulip">
-            <div class="stem"></div>
-            <div class="leaf left"></div>
-            <div class="leaf right"></div>
-            
-            <div class="flower">
-                <div class="petal petal-left"></div>
-                <div class="petal petal-right"></div>
-                <div class="petal petal-center"></div>
+        <div class="plant-container">
+            <!-- Tulipán Izquierdo -->
+            <div class="tulip tulip-left">
+                <div class="stem"></div>
+                <div class="leaf left"></div>
+                <div class="leaf right"></div>
+
+                <div class="flower">
+                    <div class="petal petal-left"></div>
+                    <div class="petal petal-right"></div>
+                    <div class="petal petal-center"></div>
+                </div>
             </div>
-            
+
+            <!-- Tulipán Central -->
+            <div class="tulip tulip-center">
+                <div class="stem"></div>
+                <div class="leaf left"></div>
+                <div class="leaf right"></div>
+
+                <div class="flower">
+                    <div class="petal petal-left"></div>
+                    <div class="petal petal-right"></div>
+                    <div class="petal petal-center"></div>
+                </div>
+            </div>
+
+            <!-- Tulipán Derecho -->
+            <div class="tulip tulip-right">
+                <div class="stem"></div>
+                <div class="leaf left"></div>
+                <div class="leaf right"></div>
+
+                <div class="flower">
+                    <div class="petal petal-left"></div>
+                    <div class="petal petal-right"></div>
+                    <div class="petal petal-center"></div>
+                </div>
+            </div>
+
             <div class="pot"></div>
         </div>
-        
+
         <button id="action-btn">Plantar y Crecer 🌷</button>
     </div>
 
     <script src="script.js"></script>
 </body>
+
 </html>
