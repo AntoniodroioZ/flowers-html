@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let isGrown = false;
 
     /* --- Lógica de la hora del día --- */
-    const debugMode = true; // CAMBIAR A FALSE PARA OCULTAR EL SLIDER Y USAR TIEMPO REAL
+    const debugMode = false; // CAMBIAR A FALSE PARA OCULTAR EL SLIDER Y USAR TIEMPO REAL
 
     const debugPanel = document.getElementById('debug-panel');
     const timeSlider = document.getElementById('time-slider');
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function initTimeLogic() {
         if (debugMode) {
             // Modo Manual (DEBUG)
-            debugPanel.classList.remove('hidden');
+            debugPanel.style.display = 'flex';
 
             // Configurar valor inicial basado en slider actual
             const currentSliderValue = parseInt(timeSlider.value);
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         } else {
             // Modo Automático (Real)
-            debugPanel.classList.add('hidden');
+            debugPanel.style.display = 'none';
 
             function setRealTime() {
                 const currentHour = new Date().getHours();
@@ -75,6 +75,31 @@ document.addEventListener('DOMContentLoaded', () => {
         star.style.animationDuration = `${Math.random() * 2 + 1}s`;
 
         starsContainer.appendChild(star);
+    }
+
+    /* --- Generación de Pasto Dinámico --- */
+    const groundContainer = document.getElementById('ground-container');
+    const totalGrass = 60; // Cantidad de brotes de pasto en toda la pantalla
+
+    for (let i = 0; i < totalGrass; i++) {
+        const grass = document.createElement('div');
+        grass.classList.add('grass');
+        
+        // Distribuido en toda la pantalla X (0% a 100%)
+        grass.style.left = `${Math.random() * 100}vw`;
+        
+        // Altura aleatoria entre 15px y 45px
+        const height = Math.random() * 30 + 15;
+        grass.style.height = `${height}px`;
+        
+        // Grosor estético levemente variable
+        const width = Math.random() * 3 + 4; 
+        grass.style.width = `${width}px`;
+
+        // Desincronizar el movimiento del viento
+        grass.style.animationDelay = `-${Math.random() * 3}s`;
+
+        groundContainer.appendChild(grass);
     }
 
     /* --- Lógica del Botón / Crecimiento --- */

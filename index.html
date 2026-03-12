@@ -4,7 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animación de Tulipanes</title>
+    <title>Jardín de Tulipanes</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="icon-192.png">
+
+    <!-- PWA settings -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#ffeb3b">
+    <link rel="apple-touch-icon" href="icon-192.png">
+
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -30,15 +39,10 @@
         <div class="cloud cloud-4"></div>
     </div>
 
-    <!-- Brotes de pasto en el suelo -->
-    <div class="ground">
-        <div class="grass grass-1"></div>
-        <div class="grass grass-2"></div>
-        <div class="grass grass-3"></div>
-        <div class="grass grass-4"></div>
-        <div class="grass grass-5"></div>
-        <div class="grass grass-6"></div>
-        <div class="grass grass-7"></div>
+    <!-- Escena: Cielo y Tierra -->
+    <div class="sky"></div>
+    <div class="ground" id="ground-container">
+        <!-- El pasto se generará dinámicamente con JavaScript aquí -->
     </div>
 
     <div class="garden">
@@ -120,6 +124,20 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+        // Registrar Service Worker para la PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registrado con éxito: ', registration.scope);
+                    })
+                    .catch(err => {
+                        console.log('Fallo al registrar el ServiceWorker: ', err);
+                    });
+            });
+        }
+    </script>
 </body>
 
 </html>

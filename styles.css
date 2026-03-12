@@ -30,10 +30,12 @@ body {
 
 .garden {
     position: relative;
+    z-index: 10;
     display: flex;
     flex-direction: column;
     align-items: center;
     transform: translateY(22vh);
+    transform-origin: bottom center;
     /* Ajustado para que descanse sobre el pasto */
 }
 
@@ -484,13 +486,11 @@ body.time-night .stars {
 /* --- Estrella Fugaz --- */
 .shooting-star {
     position: absolute;
-    top: 10vh;
-    right: -20vw;
     width: 100px;
     height: 2px;
     background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
     border-radius: 50%;
-    transform: rotate(-35deg);
+    transform: rotate(155deg); /* Apuntar cabeza hacia abajo-izquierda */
     pointer-events: none;
     z-index: -2;
     opacity: 0;
@@ -498,14 +498,14 @@ body.time-night .stars {
 
 /* La estrella fugaz solo se anima (aparece esporádicamente) si es de noche */
 body.time-night .shooting-star {
-    animation: shooting 12s infinite 4s;
-    /* Dispara cada 12 segundos, con delay de 4s */
+    animation: shooting 12s infinite 4s linear;
 }
 
 @keyframes shooting {
     0% {
-        right: -20vw;
-        top: 5vh;
+        top: 0vh; /* Nace desde el techo a la derecha */
+        left: 100vw;
+        transform: rotate(155deg) translateX(0);
         opacity: 0;
     }
 
@@ -514,13 +514,17 @@ body.time-night .shooting-star {
     }
 
     20% {
-        right: 120vw;
-        top: 60vh;
+        top: 0vh;
+        left: 100vw;
+        /* Al rotar 155 grados (izquierda y abajo) y trasladar positivamente, la estrella cae cruzando todo */
+        transform: rotate(155deg) translateX(200vmax); 
         opacity: 0;
     }
 
     100% {
-        right: 120vw;
+        top: 0vh;
+        left: 100vw;
+        transform: rotate(155deg) translateX(200vmax);
         opacity: 0;
     }
 }
@@ -721,49 +725,6 @@ body.time-night .shooting-star {
     transform: rotate(25deg);
 }
 
-/* Distintos brotes de pasto */
-.grass-1 {
-    left: 10%;
-    height: 30px;
-    animation-delay: 0s;
-}
-
-.grass-2 {
-    left: 25%;
-    height: 20px;
-    animation-delay: -1s;
-}
-
-.grass-3 {
-    left: 40%;
-    height: 35px;
-    animation-delay: -2s;
-}
-
-.grass-4 {
-    left: 60%;
-    height: 25px;
-    animation-delay: -0.5s;
-}
-
-.grass-5 {
-    left: 75%;
-    height: 32px;
-    animation-delay: -1.5s;
-}
-
-.grass-6 {
-    left: 88%;
-    height: 18px;
-    animation-delay: -0.8s;
-}
-
-.grass-7 {
-    left: 95%;
-    height: 28px;
-    animation-delay: -2.2s;
-}
-
 @keyframes sway {
     0% {
         transform: rotate(-8deg);
@@ -837,7 +798,7 @@ body.time-night .cloud::after {
 @media (max-width: 768px) {
     .garden {
         transform: translateY(18vh) scale(0.85);
-        /* Escalar todo un poco más pequeño */
+        /* Escalar sin elevar de la tierra, pero ajustando la base hacia arriba ligeramente */
     }
 
     #action-btn {
@@ -850,8 +811,8 @@ body.time-night .cloud::after {
 /* Teléfonos móviles pequeños (hasta 480px) */
 @media (max-width: 480px) {
     .garden {
-        transform: translateY(12vh) scale(0.7);
-        /* Reducir aún más para que todo quepa en la pantalla sin desbordar */
+        transform: translateY(16vh) scale(0.7);
+        /* Escalar manteniendo el ancla en el suelo, subiéndola lo justo para no verse hundida */
     }
 
     #action-btn {

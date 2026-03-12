@@ -1,0 +1,22 @@
+{
+    "name": "Jardín de Tulipanes",
+    "short_name": "Tulipanes",
+    "description": "Un hermoso jardín interactivo animado",
+    "background_color": "#1a2e12",
+    "theme_color": "#ffeb3b",
+    "display": "standalone",
+    "orientation": "portrait",
+    "start_url": "./index.html",
+    "icons": [
+        {
+            "src": "icon-192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "icon-512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ]
+}
